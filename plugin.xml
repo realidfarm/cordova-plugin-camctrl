@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-camctrl" version="0.0.2">
+    <name>CamCtrl</name>
+    <description>Cordova CamCtrl Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,camctrl</keywords>
+    <js-module src="www/camctrl.js" name="camctrl">
+        <clobbers target="camctrl" />
+    </js-module>
+    <platform name="android">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="CamCtrl">
+                <param name="android-package" value="com.realid.cordova.plugin.CamCtrl"/>
+            </feature>
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT"/>
+            <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.realid.camctrlsdk.CameraActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize">
+            </activity>
+        </config-file>
+        <framework src="com.android.support:appcompat-v7:25.0.1" />
+        <framework src="com.android.support:support-v4:25.0.1" />
+        <source-file src="src/android/libs/armeabi/libAudioEngine.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libCpuFeatures.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCAlarm.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCCore.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCCoreDevCfg.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCDisplay.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCGeneralCfgMgr.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCIndustry.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libhcnetsdk.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCPlayBack.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCPreview.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libHCVoiceTalk.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libjnidispatch.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl_v5.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl_v7.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libSystemTransform.so" target-dir="libs/armeabi" />
+        
+        <source-file src="src/android/libs/armeabi/libAudioEngine.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libCpuFeatures.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCAlarm.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCCore.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCCoreDevCfg.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCDisplay.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCGeneralCfgMgr.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCIndustry.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libhcnetsdk.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCPlayBack.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCPreview.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libHCVoiceTalk.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libjnidispatch.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl_v5.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl_v7.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/libs/armeabi/libSystemTransform.so" target-dir="libs/armeabi-v7a" />
+
+        <source-file src="src/android/libs/armeabi/libAudioEngine.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libCpuFeatures.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCAlarm.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCCore.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCCoreDevCfg.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCDisplay.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCGeneralCfgMgr.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCIndustry.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libhcnetsdk.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCPlayBack.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCPreview.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libHCVoiceTalk.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libjnidispatch.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl_v5.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libPlayCtrl_v7.so" target-dir="libs/x86" />
+        <source-file src="src/android/libs/armeabi/libSystemTransform.so" target-dir="libs/x86" />
+
+        <source-file src="src/android/libs/AudioEngineSDK.jar" target-dir="libs" />
+        <source-file src="src/android/libs/HCNetSDK.jar" target-dir="libs" />
+        <source-file src="src/android/libs/jna.jar" target-dir="libs" />
+        <source-file src="src/android/libs/PlayerSDK.jar" target-dir="libs" />        
+        <source-file src="src/android/libs/test.jar" target-dir="libs" />
+
+        <source-file src="src/android/CamCtrl.java" target-dir="src/com/realid/cordova/plugin" />
+    </platform>
+</plugin>
