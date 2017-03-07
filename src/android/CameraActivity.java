@@ -176,7 +176,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                     }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.ZOOM_IN, 0)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_IN, 0)) {
                             Log.e(TAG,
                                     "start ZOOM_IN failed with error code: "
                                             + HCNetSDK.getInstance()
@@ -186,7 +186,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.ZOOM_IN, 1)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_IN, 1)) {
                             Log.e(TAG, "stop ZOOM_IN failed with error code: "
                                     + HCNetSDK.getInstance()
                                     .NET_DVR_GetLastError());
@@ -212,7 +212,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                     }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.ZOOM_OUT, 0)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_OUT, 0)) {
                             Log.e(TAG,
                                     "start ZOOM_OUT failed with error code: "
                                             + HCNetSDK.getInstance()
@@ -222,7 +222,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.ZOOM_OUT, 1)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_OUT, 1)) {
                             Log.e(TAG, "stop ZOOM_OUT failed with error code: "
                                     + HCNetSDK.getInstance()
                                     .NET_DVR_GetLastError());
@@ -248,7 +248,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                     }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.TILT_UP, 0)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_UP, 0)) {
                             Log.e(TAG,
                                     "start TILT_UP failed with error code: "
                                             + HCNetSDK.getInstance()
@@ -258,7 +258,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.TILT_UP, 1)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_UP, 1)) {
                             Log.e(TAG, "stop TILT_UP failed with error code: "
                                     + HCNetSDK.getInstance()
                                     .NET_DVR_GetLastError());
@@ -284,7 +284,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                     }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.TILT_DOWN, 0)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 0)) {
                             Log.e(TAG,
                                     "start TILT_DOWN failed with error code: "
                                             + HCNetSDK.getInstance()
@@ -294,7 +294,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.TILT_DOWN, 1)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 1)) {
                             Log.e(TAG, "stop TILT_DOWN failed with error code: "
                                     + HCNetSDK.getInstance()
                                     .NET_DVR_GetLastError());
@@ -320,7 +320,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                     }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.PAN_LEFT, 0)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_LEFT, 0)) {
                             Log.e(TAG,
                                     "start PAN_LEFT failed with error code: "
                                             + HCNetSDK.getInstance()
@@ -330,7 +330,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.TILT_DOWN, 1)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 1)) {
                             Log.e(TAG, "stop PAN_LEFT failed with error code: "
                                     + HCNetSDK.getInstance()
                                     .NET_DVR_GetLastError());
@@ -356,7 +356,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                     }
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.PAN_RIGHT, 0)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_RIGHT, 0)) {
                             Log.e(TAG,
                                     "start PAN_RIGHT failed with error code: "
                                             + HCNetSDK.getInstance()
@@ -366,7 +366,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan, PTZCommand.PAN_RIGHT, 1)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_RIGHT, 1)) {
                             Log.e(TAG, "stop PAN_RIGHT failed with error code: "
                                     + HCNetSDK.getInstance()
                                     .NET_DVR_GetLastError());
