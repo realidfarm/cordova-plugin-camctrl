@@ -3,8 +3,10 @@ package com.realid.cordova.plugin;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -17,23 +19,23 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.hikvision.netsdk.ExceptionCallBack;
 import com.hikvision.netsdk.HCNetSDK;
 import com.hikvision.netsdk.NET_DVR_DEVICEINFO_V30;
 import com.hikvision.netsdk.NET_DVR_PREVIEWINFO;
 import com.hikvision.netsdk.PTZCommand;
-import com.hikvision.netsdk.PlaybackCallBack;
 import com.hikvision.netsdk.RealPlayCallBack;
 import com.realid.camctrl.CrashUtil;
 
 import org.MediaPlayer.PlayM4.Player;
 
 //生成的android app 包名
+//import io.cordova.hellocordova.R;
 import com.realidfarm.realidfarm.R;
-
 
 public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     private static final String TAG = "CameraActivity";
@@ -42,8 +44,6 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     private String password = "gy123456";
     private String cameraPort = "8000";
     private int channelId = 0;
-
-    private boolean cameraReady = false;
 
     private ImageView btnIncrease;
     private ImageView btnReduce;
@@ -64,19 +64,16 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     private int m_iStartChan = 0; // start channel no
     private int m_iChanNum = 0; // channel number
 
-    private boolean m_bTalkOn = false;
-    private boolean m_bPTZL = false;
-    private boolean m_bMultiPlay = false;
-
-    private boolean m_bNeedDecode = true;
-    private boolean m_bSaveRealData = false;
-    private boolean m_bStopPlayback = false;
     private boolean m_bSurfaceCreated = false;
+    private boolean isFullScreen = false;
+
 
     private static final int PERMISSION_REQ_STORAGE=1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         Intent intent = getIntent();
         cameraIp = intent.getStringExtra("cameraIp");
@@ -87,7 +84,58 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         channelId = Integer.parseInt(tunnel);
 
         setContentView(R.layout.activity_camera);
+
         startRequestPermission();
+    }
+
+    public int getScreenWidth() {
+       DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
+    }
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    private void fullScreen(){
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        ViewGroup.LayoutParams lp = m_osurfaceView.getLayoutParams();
+        lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+        ViewGroup.MarginLayoutParams mlp =(ViewGroup.MarginLayoutParams)lp;
+
+        mlp.setMargins(0,0,0,0);
+
+        m_osurfaceView.setLayoutParams(lp);
+        isFullScreen = true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isFullScreen){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            ViewGroup.LayoutParams lp = m_osurfaceView.getLayoutParams();
+            lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+            m_osurfaceView.getHolder().setFixedSize(getScreenWidth(),dip2px(this, 210f));
+
+            ViewGroup.MarginLayoutParams mlp =(ViewGroup.MarginLayoutParams)lp;
+            mlp.setMargins(0,dip2px(this, 44f),0,0);
+
+            m_osurfaceView.setLayoutParams(lp);
+            isFullScreen = false;
+
+        }else{
+            super.onBackPressed();
+        }
+
     }
 
     private void initView(){
@@ -100,6 +148,22 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         btnLeft = (ImageView) findViewById(R.id.btn_left);
         btnReduce = (ImageView) findViewById(R.id.btn_reduce);
         btnRight = (ImageView) findViewById(R.id.btn_right);
+
+        ImageView btnBack = (ImageView) findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CameraActivity.this.finish();
+            }
+        });
+
+        ImageView btnFullScreen = (ImageView) findViewById(R.id.btn_fullscreen);
+        btnFullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fullScreen();
+            }
+        });
 
 
         btnIncrease.setOnTouchListener(new View.OnTouchListener() {

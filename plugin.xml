@@ -106,6 +106,8 @@
         <resource-file src="src/android/res/drawable/ic_right_on.png" target="res/drawable/ic_right_on.png" />
         <resource-file src="src/android/res/drawable/ic_up.png" target="res/drawable/ic_up.png" />
         <resource-file src="src/android/res/drawable/ic_up_on.png" target="res/drawable/ic_up_on.png" />
+        <resource-file src="src/android/res/drawable/ic_back.png" target="res/drawable/ic_back.png" />
+        <resource-file src="src/android/res/drawable/ic_fullscreen.png" target="res/drawable/ic_fullscreen.png" />
 
         <resource-file src="src/android/res/drawable/selector_down.xml" target="res/drawable/selector_down.xml" />
         <resource-file src="src/android/res/drawable/selector_increase.xml" target="res/drawable/selector_increase.xml" />

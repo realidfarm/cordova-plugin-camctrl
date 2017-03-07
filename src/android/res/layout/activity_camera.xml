@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_camera"
+    android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.realid.cameraviewer.CameraActivity">
-
-    <SurfaceView
-        android:id="@+id/surfaceView"
-        android:layout_width="match_parent"
-        android:layout_height="210dp" />
     <RelativeLayout
-        android:layout_below="@id/surfaceView"
-        android:layout_marginTop="52dp"
+        android:id="@+id/title_bar"
+        android:background="#2dcc86"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <ImageView
+            android:id="@+id/btn_back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back"
+            android:layout_width="44dp"
+            android:layout_height="44dp" />
+
+        <TextView
+            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:text="视频监控"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/btn_fullscreen"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_fullscreen"
+            android:layout_width="44dp"
+            android:layout_height="44dp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="52dp"
         android:paddingLeft="48dp"
         android:paddingRight="48dp"
         android:layout_width="match_parent"
@@ -87,4 +113,10 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_marginTop="44dp"
+        android:layout_width="match_parent"
+        android:layout_height="210dp" />
+
+</FrameLayout>
