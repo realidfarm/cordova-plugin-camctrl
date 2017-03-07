@@ -33,7 +33,7 @@ public class CamCtrl extends CordovaPlugin{
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     Intent intent = new Intent(CamCtrl.this.cordova.getActivity(), CameraActivity.class);
-                    intent.putExtra("cameraIp", message);
+                    intent.putExtra("cameraIp", cameraIp);
                     intent.putExtra("cameraPort", cameraPort);
                     intent.putExtra("userName", userName);
                     intent.putExtra("password", password);
