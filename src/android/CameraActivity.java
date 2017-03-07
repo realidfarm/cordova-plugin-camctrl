@@ -31,7 +31,7 @@ import com.realid.camctrl.CrashUtil;
 import org.MediaPlayer.PlayM4.Player;
 
 //生成的android app 包名
-import io.cordova.hellocordova.R;
+import com.realidfarm.realidfarm.R;
 
 
 public class CameraActivity extends Activity implements SurfaceHolder.Callback {
