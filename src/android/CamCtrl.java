@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.realid.camctrlsdk.CameraActivity;
+import com.realid.cordova.plugin.CameraActivity;
 
 public class CamCtrl extends CordovaPlugin{
     private CallbackContext context;
@@ -24,12 +24,20 @@ public class CamCtrl extends CordovaPlugin{
             this.echo(message, callbackContext);
             return true;
         }else if(action.equals("launch")){
-            final String message = args.getString(0);
+            final String cameraIp = args.getString(0);
+            final String cameraPort = args.getString(1);
+            final String userName = args.getString(2);
+            final String password = args.getString(3);
+            final String tunnel = args.getString(4);
             context = callbackContext;
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     Intent intent = new Intent(CamCtrl.this.cordova.getActivity(), CameraActivity.class);
                     intent.putExtra("cameraIp", message);
+                    intent.putExtra("cameraPort", cameraPort);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("password", password);
+                    intent.putExtra("tunnel", tunnel);
                     CamCtrl.this.cordova.startActivityForResult(CamCtrl.this, intent, 0);
                 }
             });

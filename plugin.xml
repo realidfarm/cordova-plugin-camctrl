@@ -24,7 +24,7 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:name="com.realid.camctrlsdk.CameraActivity"
+            <activity android:name="com.realid.cordova.plugin.CameraActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             </activity>
         </config-file>
@@ -87,9 +87,35 @@
         <source-file src="src/android/libs/AudioEngineSDK.jar" target-dir="libs" />
         <source-file src="src/android/libs/HCNetSDK.jar" target-dir="libs" />
         <source-file src="src/android/libs/jna.jar" target-dir="libs" />
-        <source-file src="src/android/libs/PlayerSDK.jar" target-dir="libs" />        
-        <source-file src="src/android/libs/test.jar" target-dir="libs" />
+        <source-file src="src/android/libs/PlayerSDK.jar" target-dir="libs" />
+        <source-file src="src/android/libs/camctrl.jar" target-dir="libs" />
 
         <source-file src="src/android/CamCtrl.java" target-dir="src/com/realid/cordova/plugin" />
+        <source-file src="src/android/CameraActivity.java" target-dir="src/com/realid/cordova/plugin" />
+
+        <resource-file src="src/android/res/drawable/ctrl_bg.png" target="res/drawable/ctrl_bg.png" />
+        <resource-file src="src/android/res/drawable/ic_down.png" target="res/drawable/ic_down.png" />
+        <resource-file src="src/android/res/drawable/ic_down_on.png" target="res/drawable/ic_down_on.png" />
+        <resource-file src="src/android/res/drawable/ic_increase.png" target="res/drawable/ic_increase.png" />
+        <resource-file src="src/android/res/drawable/ic_increase_on.png" target="res/drawable/ic_increase_on.png" />
+        <resource-file src="src/android/res/drawable/ic_left.png" target="res/drawable/ic_left.png" />
+        <resource-file src="src/android/res/drawable/ic_left_on.png" target="res/drawable/ic_left_on.png" />
+        <resource-file src="src/android/res/drawable/ic_reduce.png" target="res/drawable/ic_reduce.png" />
+        <resource-file src="src/android/res/drawable/ic_reduce_on.png" target="res/drawable/ic_reduce_on.png" />
+        <resource-file src="src/android/res/drawable/ic_right.png" target="res/drawable/ic_right.png" />
+        <resource-file src="src/android/res/drawable/ic_right_on.png" target="res/drawable/ic_right_on.png" />
+        <resource-file src="src/android/res/drawable/ic_up.png" target="res/drawable/ic_up.png" />
+        <resource-file src="src/android/res/drawable/ic_up_on.png" target="res/drawable/ic_up_on.png" />
+
+        <resource-file src="src/android/res/drawable/selector_down.xml" target="res/drawable/selector_down.xml" />
+        <resource-file src="src/android/res/drawable/selector_increase.xml" target="res/drawable/selector_increase.xml" />
+        <resource-file src="src/android/res/drawable/selector_left.xml" target="res/drawable/selector_left.xml" />
+        <resource-file src="src/android/res/drawable/selector_reduce.xml" target="res/drawable/selector_reduce.xml" />
+        <resource-file src="src/android/res/drawable/selector_right.xml" target="res/drawable/selector_right.xml" />
+        <resource-file src="src/android/res/drawable/selector_up.xml" target="res/drawable/selector_up.xml" />
+
+        <resource-file src="src/android/res/layout/activity_camera.xml" target="res/layout/activity_camera.xml" />
+        
+
     </platform>
 </plugin>
