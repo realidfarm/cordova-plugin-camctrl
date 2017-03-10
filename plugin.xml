@@ -120,4 +120,68 @@
         
 
     </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CamCtrl">
+                <param name="ios-package" value="CamCtrl" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CamCtrl.h" />
+        <header-file src="src/ios/CameraViewController.h" />
+        <header-file src="src/ios/headers/AudioEngine.h" />
+        <header-file src="src/ios/headers/IOSPlayM4.h" />
+        <header-file src="src/ios/headers/hcnetsdk.h" />
+        <header-file src="src/ios/headers/HikDec.h" />
+        <header-file src="src/ios/DeviceInfo.h" />
+        <header-file src="src/ios/Preview.h" />
+
+        <source-file src="src/ios/CamCtrl.m" />
+        <source-file src="src/ios/DeviceInfo.m" />
+        <source-file src="src/ios/Preview.mm" />
+        <source-file src="src/ios/CameraViewController.mm" />
+
+        <source-file src="src/ios/frameworks/libHCCore_sim.a" framework="true" />
+        <source-file src="src/ios/frameworks/libHCNetSDK_sim.a" framework="true" />
+        <source-file src="src/ios/frameworks/libPlayCtrl_sim.a" framework="true" />
+        <source-file src="src/ios/frameworks/libtinyxml_sim.a" framework="true" />
+        <source-file src="src/ios/frameworks/libtinyxml.a" framework="true" />
+        <source-file src="src/ios/frameworks/libHCCore.a" framework="true" />
+        <source-file src="src/ios/frameworks/libHCNetSDK.a" framework="true" />
+        <source-file src="src/ios/frameworks/libAudioEngine_64.a" framework="true" />
+        <source-file src="src/ios/frameworks/libplayctrl.a" framework="true" />
+        <source-file src="src/ios/frameworks/libSystemTransform.a" framework="true" />
+
+        <framework src="libiconv.tbd" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="OpenAL.framework" />
+        <framework src="CoreFoundation.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="GLKit.framework" />
+        <framework src="VideoToolbox.framework" />
+        <framework src="UIKit.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="OpenGLES.framework" />
+        <framework src="QuartzCore.framework" />
+        
+        <resource-file src="src/ios/res/ctrl_bg.png" />
+        <resource-file src="src/ios/res/ic_down.png" />
+        <resource-file src="src/ios/res/ic_down_on.png" />
+        <resource-file src="src/ios/res/ic_increase.png" />
+        <resource-file src="src/ios/res/ic_increase_on.png" />
+        <resource-file src="src/ios/res/ic_left.png" />
+        <resource-file src="src/ios/res/ic_left_on.png" />
+        <resource-file src="src/ios/res/ic_reduce.png" />
+        <resource-file src="src/ios/res/ic_reduce_on.png" />
+        <resource-file src="src/ios/res/ic_right.png" />
+        <resource-file src="src/ios/res/ic_right_on.png" />
+        <resource-file src="src/ios/res/ic_up.png" />
+        <resource-file src="src/ios/res/ic_up_on.png" />
+        <resource-file src="src/ios/res/ic_back.png" />
+        <resource-file src="src/ios/res/ic_fullscreen.png" />
+    </platform>
+
 </plugin>

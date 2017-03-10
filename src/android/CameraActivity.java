@@ -330,7 +330,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         }
                     } else if (event.getAction() == MotionEvent.ACTION_UP) {
                         if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 1)) {
+                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_LEFT, 1)) {
                             Log.e(TAG, "stop PAN_LEFT failed with error code: "
                                     + HCNetSDK.getInstance()
                                     .NET_DVR_GetLastError());
