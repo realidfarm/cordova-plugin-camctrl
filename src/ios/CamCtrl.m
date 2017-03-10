@@ -29,6 +29,12 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         CameraViewController *cameraController = [[CameraViewController alloc] init];
+        cameraController.m_ip = cameraIp;
+        cameraController.m_port = cameraPort;
+        cameraController.m_user = userName;
+        cameraController.m_pwd = password;
+        cameraController.m_channel = [tunnel integerValue];
+        
         [self.viewController presentViewController:cameraController animated:true completion:nil];
     });
     

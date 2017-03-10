@@ -50,11 +50,11 @@ float g_screenH = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    m_ip = @"58.214.29.198"; //'58.214.29.198','8000','admin','gy123456','1'
-    m_port = @"8000";
-    m_user = @"admin";
-    m_pwd = @"gy123456";
-    m_channel = 1;
+    // m_ip = @"58.214.29.198"; //'58.214.29.198','8000','admin','gy123456','1'
+    // m_port = @"8000";
+    // m_user = @"admin";
+    // m_pwd = @"gy123456";
+    // m_channel = 1;
     
     
     m_lUserID = -1;
@@ -362,7 +362,7 @@ float g_screenH = 0;
         return;
     }
     
-    if(!NET_DVR_PTZControl_Other(m_lUserID, g_iStartChan, cmd, flag))
+    if(!NET_DVR_PTZControl_Other(m_lUserID, g_iStartChan + m_channel, cmd, flag))
     {
         NSLog(@"exec ptz ctrl failed with[%d]", NET_DVR_GetLastError());
     }
@@ -471,7 +471,7 @@ float g_screenH = 0;
 }
 
 - (void) startPreview{
-    m_lRealPlayID = startPreview(m_lUserID, g_iStartChan, m_playView, 0);
+    m_lRealPlayID = startPreview(m_lUserID, g_iStartChan + m_channel, m_playView, 0);
     m_bPreview = true;
 }
 
