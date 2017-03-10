@@ -82,6 +82,9 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         password = intent.getStringExtra("password");
         String tunnel = intent.getStringExtra("tunnel");
         channelId = Integer.parseInt(tunnel);
+        if (channelId>0){
+            channelId = channelId - 1;
+        }
 
         setContentView(R.layout.activity_camera);
 

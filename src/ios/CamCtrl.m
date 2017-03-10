@@ -33,8 +33,14 @@
         cameraController.m_port = cameraPort;
         cameraController.m_user = userName;
         cameraController.m_pwd = password;
-        cameraController.m_channel = [tunnel integerValue];
         
+        int itunel = [tunnel integerValue];
+        if(itunel-1>=0){
+            cameraController.m_channel = itunel-1;
+        }else{
+            cameraController.m_channel = 0 ;
+        }
+
         [self.viewController presentViewController:cameraController animated:true completion:nil];
     });
     
