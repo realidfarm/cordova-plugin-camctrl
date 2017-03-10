@@ -35,7 +35,7 @@
         cameraController.m_pwd = password;
         
         int itunel = [tunnel integerValue];
-        if(itunel-1>=0){
+        if(itunel>0){
             cameraController.m_channel = itunel-1;
         }else{
             cameraController.m_channel = 0 ;
