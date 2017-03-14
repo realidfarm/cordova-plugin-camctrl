@@ -180,7 +180,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
                     return false;
                 }
 
@@ -221,7 +221,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 try {
@@ -261,7 +261,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 try {
@@ -301,7 +301,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
                     return false;
                 }
 
@@ -342,7 +342,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 try {
@@ -382,7 +382,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 try {
