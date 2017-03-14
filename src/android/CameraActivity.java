@@ -89,7 +89,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         }
 
         String disableCtrl = intent.getStringExtra("disableCtrl");
-        if("yes" == disableCtrl){
+        if("yes".equals(disableCtrl)){
             disableControl = true;
         }
 
@@ -148,6 +148,13 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
     }
 
+    private View.OnClickListener fakeClickListener= new new View.OnClickListener(){
+        @Override
+        public void  onClick(View view){
+            Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
+        }
+    };
+
     private void initView(){
 
         m_osurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
@@ -175,250 +182,233 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             }
         });
 
+        if(disableControl){
+            btnIncrease.setOnClickListener(fakeClickListener);
+            btnReduce.setOnClickListener(fakeClickListener);
+            btnUp.setOnClickListener(fakeClickListener);
+            btnDown.setOnClickListener(fakeClickListener);
+            btnLeft.setOnClickListener(fakeClickListener);
+            btnRight.setOnClickListener(fakeClickListener);
+        }else{
 
-        btnIncrease.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
 
-                try {
-                    if (m_iLogID < 0) {
-                        Log.e(TAG, "please login on a device first");
+            btnIncrease.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    try {
+                        if (m_iLogID < 0) {
+                            Log.e(TAG, "please login on a device first");
+                            return false;
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_IN, 0)) {
+                                Log.e(TAG,
+                                        "start ZOOM_IN failed with error code: "
+                                                + HCNetSDK.getInstance()
+                                                .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "start ZOOM_IN success");
+                            }
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_IN, 1)) {
+                                Log.e(TAG, "stop ZOOM_IN failed with error code: "
+                                        + HCNetSDK.getInstance()
+                                        .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "stop ZOOM_IN success");
+                            }
+                        }
+                        return true;
+                    } catch (Exception err) {
+                        Log.e(TAG, "error: " + err.toString());
                         return false;
                     }
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_IN, 0)) {
-                            Log.e(TAG,
-                                    "start ZOOM_IN failed with error code: "
-                                            + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "start ZOOM_IN success");
-                        }
-                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_IN, 1)) {
-                            Log.e(TAG, "stop ZOOM_IN failed with error code: "
-                                    + HCNetSDK.getInstance()
-                                    .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "stop ZOOM_IN success");
-                        }
-                    }
-                    return true;
-                } catch (Exception err) {
-                    Log.e(TAG, "error: " + err.toString());
-                    return false;
                 }
-            }
-        });
+            });
 
-        btnReduce.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                try {
-                    if (m_iLogID < 0) {
-                        Log.e(TAG, "please login on a device first");
+            btnReduce.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    try {
+                        if (m_iLogID < 0) {
+                            Log.e(TAG, "please login on a device first");
+                            return false;
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_OUT, 0)) {
+                                Log.e(TAG,
+                                        "start ZOOM_OUT failed with error code: "
+                                                + HCNetSDK.getInstance()
+                                                .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "start ZOOM_OUT success");
+                            }
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_OUT, 1)) {
+                                Log.e(TAG, "stop ZOOM_OUT failed with error code: "
+                                        + HCNetSDK.getInstance()
+                                        .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "stop ZOOM_OUT success");
+                            }
+                        }
+                        return true;
+                    } catch (Exception err) {
+                        Log.e(TAG, "error: " + err.toString());
                         return false;
                     }
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_OUT, 0)) {
-                            Log.e(TAG,
-                                    "start ZOOM_OUT failed with error code: "
-                                            + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "start ZOOM_OUT success");
-                        }
-                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.ZOOM_OUT, 1)) {
-                            Log.e(TAG, "stop ZOOM_OUT failed with error code: "
-                                    + HCNetSDK.getInstance()
-                                    .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "stop ZOOM_OUT success");
-                        }
-                    }
-                    return true;
-                } catch (Exception err) {
-                    Log.e(TAG, "error: " + err.toString());
-                    return false;
                 }
-            }
-        });
+            });
 
-        btnUp.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                try {
-                    if (m_iLogID < 0) {
-                        Log.e(TAG, "please login on a device first");
+            btnUp.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    try {
+                        if (m_iLogID < 0) {
+                            Log.e(TAG, "please login on a device first");
+                            return false;
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_UP, 0)) {
+                                Log.e(TAG,
+                                        "start TILT_UP failed with error code: "
+                                                + HCNetSDK.getInstance()
+                                                .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "start TILT_UP success");
+                            }
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_UP, 1)) {
+                                Log.e(TAG, "stop TILT_UP failed with error code: "
+                                        + HCNetSDK.getInstance()
+                                        .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "stop TILT_UP success");
+                            }
+                        }
+                        return true;
+                    } catch (Exception err) {
+                        Log.e(TAG, "error: " + err.toString());
                         return false;
                     }
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_UP, 0)) {
-                            Log.e(TAG,
-                                    "start TILT_UP failed with error code: "
-                                            + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "start TILT_UP success");
-                        }
-                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_UP, 1)) {
-                            Log.e(TAG, "stop TILT_UP failed with error code: "
-                                    + HCNetSDK.getInstance()
-                                    .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "stop TILT_UP success");
-                        }
-                    }
-                    return true;
-                } catch (Exception err) {
-                    Log.e(TAG, "error: " + err.toString());
-                    return false;
                 }
-            }
-        });
+            });
 
-        btnDown.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-
-                try {
-                    if (m_iLogID < 0) {
-                        Log.e(TAG, "please login on a device first");
+            btnDown.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    try {
+                        if (m_iLogID < 0) {
+                            Log.e(TAG, "please login on a device first");
+                            return false;
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 0)) {
+                                Log.e(TAG,
+                                        "start TILT_DOWN failed with error code: "
+                                                + HCNetSDK.getInstance()
+                                                .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "start TILT_DOWN success");
+                            }
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 1)) {
+                                Log.e(TAG, "stop TILT_DOWN failed with error code: "
+                                        + HCNetSDK.getInstance()
+                                        .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "stop TILT_DOWN success");
+                            }
+                        }
+                        return true;
+                    } catch (Exception err) {
+                        Log.e(TAG, "error: " + err.toString());
                         return false;
                     }
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 0)) {
-                            Log.e(TAG,
-                                    "start TILT_DOWN failed with error code: "
-                                            + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "start TILT_DOWN success");
-                        }
-                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.TILT_DOWN, 1)) {
-                            Log.e(TAG, "stop TILT_DOWN failed with error code: "
-                                    + HCNetSDK.getInstance()
-                                    .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "stop TILT_DOWN success");
-                        }
-                    }
-                    return true;
-                } catch (Exception err) {
-                    Log.e(TAG, "error: " + err.toString());
-                    return false;
                 }
-            }
-        });
+            });
 
-        btnLeft.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                try {
-                    if (m_iLogID < 0) {
-                        Log.e(TAG, "please login on a device first");
+            btnLeft.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    try {
+                        if (m_iLogID < 0) {
+                            Log.e(TAG, "please login on a device first");
+                            return false;
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_LEFT, 0)) {
+                                Log.e(TAG,
+                                        "start PAN_LEFT failed with error code: "
+                                                + HCNetSDK.getInstance()
+                                                .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "start PAN_LEFT success");
+                            }
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_LEFT, 1)) {
+                                Log.e(TAG, "stop PAN_LEFT failed with error code: "
+                                        + HCNetSDK.getInstance()
+                                        .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "stop PAN_LEFT success");
+                            }
+                        }
+                        return true;
+                    } catch (Exception err) {
+                        Log.e(TAG, "error: " + err.toString());
                         return false;
                     }
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_LEFT, 0)) {
-                            Log.e(TAG,
-                                    "start PAN_LEFT failed with error code: "
-                                            + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "start PAN_LEFT success");
-                        }
-                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_LEFT, 1)) {
-                            Log.e(TAG, "stop PAN_LEFT failed with error code: "
-                                    + HCNetSDK.getInstance()
-                                    .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "stop PAN_LEFT success");
-                        }
-                    }
-                    return true;
-                } catch (Exception err) {
-                    Log.e(TAG, "error: " + err.toString());
-                    return false;
                 }
-            }
-        });
+            });
 
-        btnRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(disableControl){
-                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                try {
-                    if (m_iLogID < 0) {
-                        Log.e(TAG, "please login on a device first");
+            btnRight.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    try {
+                        if (m_iLogID < 0) {
+                            Log.e(TAG, "please login on a device first");
+                            return false;
+                        }
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_RIGHT, 0)) {
+                                Log.e(TAG,
+                                        "start PAN_RIGHT failed with error code: "
+                                                + HCNetSDK.getInstance()
+                                                .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "start PAN_RIGHT success");
+                            }
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                            if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
+                                    m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_RIGHT, 1)) {
+                                Log.e(TAG, "stop PAN_RIGHT failed with error code: "
+                                        + HCNetSDK.getInstance()
+                                        .NET_DVR_GetLastError());
+                            } else {
+                                Log.i(TAG, "stop PAN_RIGHT success");
+                            }
+                        }
+                        return true;
+                    } catch (Exception err) {
+                        Log.e(TAG, "error: " + err.toString());
                         return false;
                     }
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_RIGHT, 0)) {
-                            Log.e(TAG,
-                                    "start PAN_RIGHT failed with error code: "
-                                            + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "start PAN_RIGHT success");
-                        }
-                    } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                        if (!HCNetSDK.getInstance().NET_DVR_PTZControl_Other(
-                                m_iLogID, m_iStartChan + channelId, PTZCommand.PAN_RIGHT, 1)) {
-                            Log.e(TAG, "stop PAN_RIGHT failed with error code: "
-                                    + HCNetSDK.getInstance()
-                                    .NET_DVR_GetLastError());
-                        } else {
-                            Log.i(TAG, "stop PAN_RIGHT success");
-                        }
-                    }
-                    return true;
-                } catch (Exception err) {
-                    Log.e(TAG, "error: " + err.toString());
-                    return false;
                 }
-            }
-        });
+            });
 
-        
+        }
     }
 
     private void realInit(){
