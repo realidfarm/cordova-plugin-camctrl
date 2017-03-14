@@ -148,7 +148,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
     }
 
-    private View.OnClickListener fakeClickListener= new new View.OnClickListener(){
+    private View.OnClickListener fakeClickListener= new View.OnClickListener(){
         @Override
         public void  onClick(View view){
             Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGTH_SHORT).show();
