@@ -26,6 +26,7 @@
     NSString* userName = [command.arguments objectAtIndex: 2];
     NSString* password = [command.arguments objectAtIndex: 3];
     NSString* tunnel = [command.arguments objectAtIndex: 4];
+    NSString* disableCtrl = [command.arguments objectAtIndex: 5];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         CameraViewController *cameraController = [[CameraViewController alloc] init];
@@ -33,6 +34,11 @@
         cameraController.m_port = cameraPort;
         cameraController.m_user = userName;
         cameraController.m_pwd = password;
+        if(disableCtrl == @"yes"){
+            cameraController.m_disableCtrl = true;
+        }else{
+            cameraController.m_disableCtrl = false;
+        }
         
         int itunel = [tunnel integerValue];
         if(itunel>0){

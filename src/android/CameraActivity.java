@@ -43,6 +43,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     private String userName = "admin";
     private String password = "gy123456";
     private String cameraPort = "8000";
+    private boolean disableControl = false;
     private int channelId = 0;
 
     private ImageView btnIncrease;
@@ -84,6 +85,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         channelId = Integer.parseInt(tunnel);
         if (channelId>0){
             channelId = channelId - 1;
+        }
+
+        String disableCtrl = intent.getStringExtra("disableCtrl");
+        if("yes" == disableCtrl){
+            disableControl = true;
         }
 
         setContentView(R.layout.activity_camera);
@@ -172,6 +178,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         btnIncrease.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if(disableControl){
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    return false;
+                }
+
                 try {
                     if (m_iLogID < 0) {
                         Log.e(TAG, "please login on a device first");
@@ -208,6 +219,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         btnReduce.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if(disableControl){
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    return false;
+                }
                 try {
                     if (m_iLogID < 0) {
                         Log.e(TAG, "please login on a device first");
@@ -244,6 +259,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         btnUp.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if(disableControl){
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    return false;
+                }
                 try {
                     if (m_iLogID < 0) {
                         Log.e(TAG, "please login on a device first");
@@ -280,6 +299,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         btnDown.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if(disableControl){
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    return false;
+                }
+
                 try {
                     if (m_iLogID < 0) {
                         Log.e(TAG, "please login on a device first");
@@ -316,6 +340,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         btnLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if(disableControl){
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    return false;
+                }
                 try {
                     if (m_iLogID < 0) {
                         Log.e(TAG, "please login on a device first");
@@ -352,6 +380,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         btnRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if(disableControl){
+                    Toast.makeText(CameraActivity.this, "您没有控制摄像头的权限", Toast.LENGHT_SHORT).show();
+                    return false;
+                }
                 try {
                     if (m_iLogID < 0) {
                         Log.e(TAG, "please login on a device first");
@@ -384,6 +416,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 }
             }
         });
+
+        
     }
 
     private void realInit(){

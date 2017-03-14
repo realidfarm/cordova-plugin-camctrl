@@ -29,6 +29,7 @@ public class CamCtrl extends CordovaPlugin{
             final String userName = args.getString(2);
             final String password = args.getString(3);
             final String tunnel = args.getString(4);
+            final String disableCtrl = args.getString(5);
             context = callbackContext;
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
@@ -38,6 +39,7 @@ public class CamCtrl extends CordovaPlugin{
                     intent.putExtra("userName", userName);
                     intent.putExtra("password", password);
                     intent.putExtra("tunnel", tunnel);
+                    intent.putExtra("disableCtrl", disableCtrl);
                     CamCtrl.this.cordova.startActivityForResult(CamCtrl.this, intent, 0);
                 }
             });

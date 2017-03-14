@@ -36,6 +36,7 @@
 @synthesize m_user;
 @synthesize m_pwd;
 @synthesize m_channel;
+@synthesize m_disableCtrl;
 
 CameraViewController *g_pController = NULL;
 
@@ -359,6 +360,17 @@ float g_screenH = 0;
 - (void) doPTZCtrl:(uint)cmd withFlag:(uint)flag{
     if (m_lUserID < 0) {
         NSLog(@"Please logon a device first!");
+        return;
+    }
+
+    if(m_disableCtrl){
+         UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"没有权限"
+                              message:@"您没有控制摄像头的权限"
+                              delegate:nil
+                              cancelButtonTitle:@"确定"
+                              otherButtonTitles:nil];
+        [alert show];
         return;
     }
     

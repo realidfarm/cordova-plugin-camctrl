@@ -31,6 +31,7 @@
 @property NSString *m_user;
 @property NSString *m_pwd;
 @property int m_channel;
+@property bool m_disableCtrl;
 
 - (void) goback;
 
