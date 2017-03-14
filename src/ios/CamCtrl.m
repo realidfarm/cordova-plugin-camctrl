@@ -34,7 +34,7 @@
         cameraController.m_port = cameraPort;
         cameraController.m_user = userName;
         cameraController.m_pwd = password;
-        if(disableCtrl == @"yes"){
+        if([disableCtrl isEqual: @"yes"]){
             cameraController.m_disableCtrl = true;
         }else{
             cameraController.m_disableCtrl = false;
