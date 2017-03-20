@@ -36,7 +36,7 @@ import org.MediaPlayer.PlayM4.Player;
 
 //生成的android app 包名
 //import io.cordova.hellocordova.R;
-import com.realidfarm.realidfarm.R;
+import com.realidtek.htfarm.R;
 
 public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     private static final String TAG = "CameraActivity";
